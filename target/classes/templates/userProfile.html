@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" th:href="@{/userProfile.css}"/>
+</head>
+<body>
+<div class="profile-container">
+    <!-- Background Image -->
+    <div class="background-image"
+         th:style="${userProfile.backgroundImageBase64 != null} ? 'background-image: url(data:image/png;base64,' + ${userProfile.backgroundImageBase64} + ');' : 'background-image: url(/images/default-bg.jpg);'">
+    </div>
+
+    <div class="profile-details">
+
+        <img th:src="@{'data:image/png;base64,' + ${userProfile.profileImageBase64}}" alt="Profile Image" id="pfp"/>
+        <h2 th:text="${userProfile.user != null ? userProfile.user.firstName + ' ' + userProfile.user.lastName : 'User Name'}">User Name</h2>
+        <p><strong>Location:</strong> <span th:text="${userProfile.location != null ? userProfile.location : 'No location set'}">Location</span></p>
+        <p><strong>Bio:</strong> <span th:text="${userProfile.bio != null ? userProfile.bio : 'No bio available'}">User Bio</span></p>
+    </div>
+
+    <div class="update-profile">
+        <a th:href="@{/profile/edit/{userId}(userId=${userProfile.user.id})}" class="update-button">Update Profile</a>
+
+    </div>
+</div>
+
+
+
+<div id="followersModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeFollowersModal()">&times;</span>
+        <h2>All Followers</h2>
+        <div class="followers-modal-grid">
+            <div class="follower" th:each="follower : ${followers}">
+                <img th:src="@{'data:image/png;base64,' + ${follower.userProfileModel.getProfileImageBase64()}}" alt="Follower Image" class="follower-image"/>
+                <p th:text="${follower.username}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="nav-bar">
+    <a th:href="@{/homeFeed/{username}(username=${username})}" class="home-feed-button">Home Feed</a>
+</div>
+
+<button id="postButton" onclick="openPostForm()">+</button>
+
+
+<div id="postFormModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closePostForm()">&times;</span>
+        <h2>Create a Post</h2>
+        <form th:action="@{/userProfile/post}" method="post" enctype="multipart/form-data">
+            <label for="caption">Caption:</label>
+            <textarea id="caption" name="caption" rows="3"></textarea>
+
+            <label for="postImage">Upload Image:</label>
+            <input type="file" id="postImage" name="postImg" accept="image/*">
+
+            <button type="submit">Post</button>
+        </form>
+    </div>
+</div>
+<div class="profile-body">
+    <div class="followers-section">
+        <h3>Your Followers</h3>
+        <div class="followers-grid">
+            <div class="follower" th:each="follower : ${followers}">
+                <img th:src="@{'data:image/png;base64,' + ${follower.userProfileModel.getProfileImageBase64()}}" alt="Follower Image" class="follower-image"/>
+                <p th:text="${follower.username}"></p>
+            </div>
+        </div>
+        <button onclick="openFollowersModal()">View All Followers</button>
+    </div>
+    <div class="posts">
+        <h3>User Posts</h3>
+        <div th:each="post : ${userPosts}">
+            <div class="post">
+                <p th:text="${post.caption}"></p>
+                <img th:src="@{'data:image/png;base64,' + ${post.getPostImageBase64()}}" alt="Post Image" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/userProfile.js}"></script>
+</body>
+</html>
+

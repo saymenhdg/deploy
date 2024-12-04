@@ -1,0 +1,166 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f0f2f5; /* Light gray background */
+}
+
+.profile-container {
+    position: relative;
+    max-width: 100%;
+    margin: 10px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    overflow: hidden;
+}
+
+.background-image {
+    position: relative;
+    width: 100%;
+    height: 350px; /* Adjust the height as needed */
+    overflow: hidden;
+    background-color: #d9d9d9; /* Fallback color */
+}
+
+.background-image img#backgroundimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the entire div */
+}
+
+/* Profile details section */
+.profile-details {
+    position: relative;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    margin-top: -75px; /* Position it partially overlapping the background */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for emphasis */
+    text-align: center; /* Center-align text and profile image */
+    z-index: 1;
+}
+
+/* Profile image styling */
+.profile-details img#pfp {
+    width: 150px; /* Adjust the size as needed */
+    height: 150px;
+    border-radius: 50%; /* Makes the profile image round */
+    border: 4px solid white; /* Optional white border around profile */
+    margin-top: -75px; /* Move up to overlap the background image */
+}
+
+/* User information styling */
+.profile-details h2 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #1c1e21;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Follow/Unfollow Button */
+.profile-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#followButton {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#followButton:hover {
+    background-color: #2980b9;
+}
+
+/* Posts Section */
+.posts {
+    margin: auto;
+    width: 800px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.posts h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.post {
+    background-color: grey;
+    border: 1px solid #ccc;
+    height: 350px;
+    border-radius: 5px;
+    padding: 30px;
+    margin: auto;
+    width: 80%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.post p {
+    font-size: 45px;
+    color: black;
+    font-family: Arial, sans-serif;
+    margin: 0 0 10px;
+}
+
+.post img {
+    max-width: 100%;
+    height: 300px;
+    border-radius: 5px;
+}
+
+/* Navigation Bar */
+.nav-bar {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.home-feed-button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.home-feed-button:hover {
+    background-color: #2980b9;
+}
+.follow-button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.follow-button:not(.following) {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.follow-button.following {
+    background-color: #e0245e;
+    color: white;
+}

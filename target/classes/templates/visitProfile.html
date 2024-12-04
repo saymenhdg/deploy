@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Visit User Profile</title>
+    <link rel="stylesheet" th:href="@{/visitProfile.css}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+</head>
+<body>
+<div class="profile-container">
+    <!-- Background Image -->
+    <div class="background-image"
+         th:style="${userProfile.backgroundImageBase64 != null} ? 'background-image: url(data:image/png;base64,' + ${userProfile.backgroundImageBase64} + ');' : 'background-image: url(/images/default-bg.jpg);'">
+    </div>
+
+    <div class="profile-details">
+        <img th:src="@{'data:image/png;base64,' + ${userProfile.profileImageBase64}}" alt="Profile Image" id="pfp"/>
+
+        <h2 th:text="${userProfile.user != null ? userProfile.user.firstName + ' ' + userProfile.user.lastName : 'User Name'}">User Name</h2>
+
+        <p><strong>Location:</strong>
+            <span th:text="${userProfile.location != null ? userProfile.location : 'No location set'}">Location</span>
+        </p>
+
+        <p><strong>Bio:</strong>
+            <span th:text="${userProfile.bio != null ? userProfile.bio : 'No bio available'}">User Bio</span>
+        </p>
+
+        <div class="profile-actions">
+            <div th:if="${userProfile.user.username != currentUsername}">
+                <button id="followButton"
+                        th:data-follower="${session.username}"
+                        th:data-following="${userProfile.user.username}"
+                        th:text="${isFollowing ? 'Unfollow' : 'Follow'}"
+                        class="follow-button">
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="posts">
+        <h3>User Posts</h3>
+        <div th:each="post : ${userPosts}">
+            <div class="post">
+                <p th:text="${post.caption}"></p>
+                <img th:src="@{'data:image/png;base64,' + ${post.getPostImageBase64()}}" alt="Post Image" />
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <a th:href="@{/homeFeed/{username}(username=${currentUsername})}" class="home-feed-button">Home Feed</a>
+    </div>
+</div>
+
+
+<script th:src="@{/visitProfile.js}"></script>
+</body>
+</html>

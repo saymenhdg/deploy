@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Post</title>
+    <link rel="stylesheet" th:href="@{/editPost.css}" />
+</head>
+<body>
+<div class="dashboard-container">
+    <aside class="dashboard-sidebar">
+        <h2>Admin Dashboard</h2>
+        <nav>
+            <ul class="nav-links">
+                <li><a th:href="@{/admin/users}">Manage Users</a></li>
+                <li><a th:href="@{/admin/posts}">Manage Posts</a></li>
+                <li><a th:href="@{/logout}">Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="dashboard-main">
+        <h2>Edit Post</h2>
+        <form th:action="@{/admin/posts/update}" th:object="${post}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}" />
+            <input type="text" th:field="*{caption}" />
+            <input type="file" th:field="*{postImgFile}" accept="image/*" />
+            <button type="submit">Save Changes</button>
+        </form>
+    </main>
+</div>
+</body>
+</html>

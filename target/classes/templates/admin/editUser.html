@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit User</title>
+  <link rel="stylesheet" th:href="@{/editUser.css}" />
+</head>
+<body>
+<div class="dashboard-container">
+  <aside class="dashboard-sidebar">
+    <h2>Admin Dashboard</h2>
+    <nav>
+      <ul class="nav-links">
+        <li><a th:href="@{/admin/users}">Manage Users</a></li>
+        <li><a th:href="@{/admin/posts}">Manage Posts</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="dashboard-main">
+    <h2>Edit User</h2>
+    <form th:action="@{/admin/users/update}" th:object="${user}" method="post">
+      <input type="hidden" th:field="*{id}" />
+      <label>First Name: <input type="text" th:field="*{firstName}" /></label><br>
+      <label>Last Name: <input type="text" th:field="*{lastName}" /></label><br>
+      <label>Email: <input type="email" th:field="*{email}" /></label><br>
+      <label>Age: <input type="text" th:field="*{age}" /></label><br>
+      <label>Username: <input type="text" th:field="*{username}" /></label><br>
+      <button type="submit">Save</button>
+    </form>
+  </main>
+</div>
+</body>
+</html>

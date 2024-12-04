@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" th:href="@{/editProfile.css}"/>
+</head>
+<body>
+<div class="edit-profile-container">
+    <!-- Notice the correct Thymeleaf URL syntax here -->
+    <form th:action="@{/profile/edit/{userId}(userId=${userProfile.user.id})}"
+          method="post"
+          th:object="${userProfile}"
+          enctype="multipart/form-data">
+
+        <input type="hidden" th:field="*{profileId}"/>
+        <input type="hidden" th:field="*{user.id}"/>
+
+        <label for="bio">Bio:</label>
+        <textarea id="bio" th:field="*{bio}"></textarea>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" th:field="*{location}"/>
+
+        <label for="profileImage">Profile Image:</label>
+        <input type="file" id="profileImage" name="profileImage" accept="image/*"/>
+
+        <label for="backgroundImage">Background Image:</label>
+        <input type="file" id="backgroundImage" name="backgroundImage" accept="image/*"/>
+
+        <button type="submit">Update Profile</button>
+    </form>
+
+    <!-- Add error message display -->
+    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+    <!-- Add success message display -->
+    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+</div>
+
+<style>
+    .edit-profile-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+
+    .edit-profile-container h2 {
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin: 10px 0 5px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    input[type="text"], textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: vertical;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    input[type="file"] {
+        margin-bottom: 15px;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    .alert {
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 4px;
+    }
+
+    .alert-danger {
+        background-color: #ffe6e6;
+        color: #dc3545;
+        border: 1px solid #dc3545;
+    }
+
+    .alert-success {
+        background-color: #e6ffe6;
+        color: #28a745;
+        border: 1px solid #28a745;
+    }
+</style>
+</body>
+</html>

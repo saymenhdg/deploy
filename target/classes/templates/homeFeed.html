@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Feed</title>
+    <link rel="stylesheet" th:href="@{/homefeed.css}"/>
+</head>
+<body>
+<!-- Navbar Section -->
+<nav class="navbar">
+    <div class="navbar-left">
+
+        <a th:href="@{/userProfile/{username}(username=${username})}" class="navbar-link profile-link">
+            Profile
+        </a>
+    </div>
+    <div class="navbar-center">
+        <input type="text" id="searchInput" placeholder="Search for users..." class="search-bar">
+        <button onclick="searchUsers()" class="search-btn">Search</button>
+    </div>
+    <div class="navbar-right">
+
+        <a href="/logout" class="navbar-link">Logout</a>
+    </div>
+</nav>
+
+<div id="modalBackdrop"></div>
+
+<div id="searchResultsModal">
+    <div>
+        <h3>Search Results</h3>
+        <ul id="resultsList"></ul>
+        <button onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<div class="feed-container">
+    <div th:each="post : ${posts}" class="post-card">
+        <div class="post-header">
+            <a th:if="${post.user != null and post.user.userProfileModel != null}"
+               th:href="@{/visitProfile/{username}(username=${post.user.username})}">
+                <img th:src="'data:image/jpeg;base64,' + ${post.user.userProfileModel.profileImageBase64}"
+                     alt="Profile Picture" class="profile-pic"/>
+            </a>
+            <a th:if="${post.user != null}"
+               th:href="@{/visitProfile/{username}(username=${post.user.username})}">
+                <span class="username" th:text="${post.user.username}"></span>
+            </a>
+        </div>
+        <div class="post-content">
+            <p th:text="${post.caption}"></p>
+            <img th:if="${post.postImg != null}"
+                 th:src="'data:image/jpeg;base64,' + ${post.getPostImageBase64()}"
+                 alt="Post Image" class="post-image"/>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/homeFeed.js}"></script>
+</body>
+</html>
