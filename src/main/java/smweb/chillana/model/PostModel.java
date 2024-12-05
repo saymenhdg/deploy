@@ -20,7 +20,7 @@ public class PostModel {
 
     private String caption;
 
-   @Lob
+    @Lob
     @Column(columnDefinition = "bytea")
     private byte[] postImg;
 
