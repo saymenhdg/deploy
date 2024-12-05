@@ -21,10 +21,10 @@ public class UserProfileModel {
     private UserModel user;
     private String location;
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
+    @Column(columnDefinition = "bytea")
     private byte[] profileImage;
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
+    @Column(columnDefinition = "bytea")
     private byte[] backgroundImage;
     private String bio;
 
