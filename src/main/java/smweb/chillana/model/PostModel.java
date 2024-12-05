@@ -20,8 +20,8 @@ public class PostModel {
 
     private String caption;
 
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
+   @Lob
+    @Column(columnDefinition = "bytea")
     private byte[] postImg;
 
     @Transient  // This will prevent Spring from trying to persist this field
